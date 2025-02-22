@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:samharvey/ui/widgets/text_heading_widget.dart';
+import 'package:samharvey/ui/views/home_view.dart';
 
 class PortfolioView extends StatefulWidget {
   const PortfolioView({super.key});
@@ -20,6 +20,8 @@ class _PortfolioViewState extends State<PortfolioView> {
     }
   }
 
+  final pageController = PageController();
+
   double get mediaHeight => MediaQuery.sizeOf(context).height;
 
   @override
@@ -27,32 +29,28 @@ class _PortfolioViewState extends State<PortfolioView> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        title: SizedBox(height: 60, child: Image.asset("images/logo.png")),
-      ),
-      body: Stack(
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(32),
-                child: Column(
-                  children: [
-                    TextHeadingWidget(text: "Sam Harvey"),
-                    Text(mediaWidth.toString()),
-                  ],
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Image.asset(
-                  "images/sam_office.png",
-                  width: adaptiveWidth(mediaWidth),
-                ),
-              ),
-            ],
+        title: Padding(
+          padding: const EdgeInsets.all(16),
+          child: SizedBox(height: 60, child: Image.asset("images/logo.png")),
+        ),
+        actions: [
+          IconButton(icon: Icon(Icons.light_mode), onPressed: () {}),
+          IconButton(
+            onPressed: () {
+              pageController.animateToPage(
+                1,
+                duration: const Duration(seconds: 1),
+                curve: Curves.easeInOut,
+              );
+            },
+            icon: Icon(Icons.email),
           ),
         ],
+      ),
+      body: PageView(
+        scrollDirection: Axis.vertical,
+        controller: pageController,
+        children: [HomeView(width: adaptiveWidth(mediaWidth)), Text("Hello")],
       ),
     );
   }
