@@ -34,7 +34,6 @@ class _PortfolioViewState extends State<PortfolioView> {
           child: SizedBox(height: 60, child: Image.asset("images/logo.png")),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.light_mode), onPressed: () {}),
           IconButton(
             onPressed: () {
               pageController.animateToPage(
