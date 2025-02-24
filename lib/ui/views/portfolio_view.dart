@@ -9,20 +9,7 @@ class PortfolioView extends StatefulWidget {
 }
 
 class _PortfolioViewState extends State<PortfolioView> {
-  double get mediaWidth => MediaQuery.sizeOf(context).width;
-  double adaptiveWidth(double width) {
-    if (mediaWidth > 1250) {
-      return width * 0.3;
-    } else if (mediaWidth > 500) {
-      return width * 0.5;
-    } else {
-      return width;
-    }
-  }
-
   final pageController = PageController();
-
-  double get mediaHeight => MediaQuery.sizeOf(context).height;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +36,7 @@ class _PortfolioViewState extends State<PortfolioView> {
       body: PageView(
         scrollDirection: Axis.vertical,
         controller: pageController,
-        children: [HomeView(width: adaptiveWidth(mediaWidth)), Text("Hello")],
+        children: [HomeView(), Text("Hello")],
       ),
     );
   }

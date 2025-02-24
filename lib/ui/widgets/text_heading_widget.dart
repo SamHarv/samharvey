@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:samharvey/config/constants.dart';
+import 'package:samharvey/logic/services/adaptive_font.dart';
 
 class TextHeadingWidget extends StatelessWidget {
   final String text;
@@ -14,7 +15,7 @@ class TextHeadingWidget extends StatelessWidget {
       overflow: TextOverflow.clip,
       style: GoogleFonts.openSans(
         textStyle: TextStyle(
-          fontSize: 60,
+          fontSize: AdaptiveFontSize.getFontSize(context, 60),
           fontWeight: FontWeight.bold,
           fontFamily: "Open Sans",
           color: white,
