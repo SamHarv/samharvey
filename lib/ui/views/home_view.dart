@@ -36,7 +36,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    print(mediaWidth);
     return Stack(
       alignment: Alignment.bottomRight,
       children: [
@@ -151,7 +150,6 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ],
               ),
-              // TODO: Change layout when wider than 1250 || h/w > 0.9 => landscape layout
               Padding(
                 padding: const EdgeInsets.only(left: 24, top: 24),
                 child: Align(
