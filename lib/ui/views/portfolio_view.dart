@@ -107,61 +107,68 @@ class _PortfolioViewState extends State<PortfolioView> {
         behavior: ScrollConfiguration.of(context).copyWith(
           dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse},
         ),
-        child: Listener(
-          onPointerSignal: (pointerSignal) {
-            if (pointerSignal is PointerScrollEvent) {
-              if (pointerSignal.kind == PointerDeviceKind.mouse) {
-                setState(() {
-                  isMouse = true;
-                });
-              } else {
-                setState(() {
-                  isMouse = false;
-                });
-              }
-              if (pointerSignal.scrollDelta.dy > 0) {
-                if (_index == 10) {
-                  return;
-                }
-                pageController.nextPage(
-                  duration: _animationDuration,
-                  curve: _curve,
-                );
-              } else {
-                if (_index == 0) {
-                  return;
-                }
-                pageController.previousPage(
-                  duration: _animationDuration,
-                  curve: _curve,
-                );
-              }
-            }
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              isMouse = false;
+            });
           },
-          child: PageView(
-            physics:
-                isMouse
-                    ? const NeverScrollableScrollPhysics()
-                    : const PageScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            controller: pageController,
-            pageSnapping: true,
-            onPageChanged: (index) {
-              setState(() => _index = index);
+          child: Listener(
+            onPointerSignal: (pointerSignal) {
+              if (pointerSignal is PointerScrollEvent) {
+                if (pointerSignal.kind == PointerDeviceKind.mouse) {
+                  setState(() {
+                    isMouse = true;
+                  });
+                } else {
+                  setState(() {
+                    isMouse = false;
+                  });
+                }
+                if (pointerSignal.scrollDelta.dy > 0) {
+                  if (_index == 10) {
+                    return;
+                  }
+                  pageController.nextPage(
+                    duration: _animationDuration,
+                    curve: _curve,
+                  );
+                } else {
+                  if (_index == 0) {
+                    return;
+                  }
+                  pageController.previousPage(
+                    duration: _animationDuration,
+                    curve: _curve,
+                  );
+                }
+              }
             },
-            children: [
-              HomeView(),
-              AppView(app: apps[0]),
-              AppView(app: apps[1]),
-              AppView(app: apps[2]),
-              AppView(app: apps[3]),
-              AppView(app: apps[4]),
-              AppView(app: apps[5]),
-              AppView(app: apps[6]),
-              AppView(app: apps[7]),
-              DigbyView(),
-              ContactView(),
-            ],
+            child: PageView(
+              physics:
+                  isMouse
+                      ? const NeverScrollableScrollPhysics()
+                      : const PageScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              controller: pageController,
+              pageSnapping: true,
+              onPageChanged: (index) {
+                setState(() => _index = index);
+              },
+              children: [
+                HomeView(),
+                AppView(app: apps[0]),
+                AppView(app: apps[1]),
+                AppView(app: apps[2]),
+                AppView(app: apps[3]),
+                AppView(app: apps[4]),
+                AppView(app: apps[5]),
+                AppView(app: apps[6]),
+                AppView(app: apps[7]),
+                DigbyView(),
+                ContactView(),
+              ],
+            ),
           ),
         ),
       ),

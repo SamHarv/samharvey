@@ -65,7 +65,7 @@ class ContactView extends StatelessWidget {
                 icon: FaIcon(FontAwesomeIcons.linkedin),
                 onPressed:
                     () => UrlLauncher.launch(
-                      "https://www.linkedin.com/company/o2-tech/",
+                      "www.linkedin.com/in/sam-harvey-83a182234",
                     ),
               ),
             ],

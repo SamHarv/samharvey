@@ -18,6 +18,7 @@ class _DigbyViewState extends State<DigbyView> {
   @override
   Widget build(BuildContext context) {
     final mediaWidth = MediaQuery.sizeOf(context).width;
+    final mediaHeight = MediaQuery.sizeOf(context).height;
     return Center(
       child: Column(
         spacing: 48,
@@ -61,7 +62,10 @@ class _DigbyViewState extends State<DigbyView> {
               },
               child: Image.asset(
                 hovering ? "images/move.png" : "images/digby.png",
-                width: mediaWidth * 0.5,
+                width:
+                    (mediaWidth / mediaHeight > 0.9)
+                        ? mediaHeight / 3
+                        : mediaWidth * 0.5,
               ),
             ),
           ),
