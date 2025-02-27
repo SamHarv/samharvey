@@ -81,25 +81,30 @@ class _HomeViewState extends State<HomeView> {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: blue,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(32),
-                      bottomLeft: Radius.circular(32),
-                    ),
-                  ),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: mediaWidth * 0.5 - 56,
-                    ),
-                    child: SizedBox(
-                      child: Image.asset(
-                        "images/sam_office.png",
-                        width: adaptiveImageWidth(mediaWidth),
+                child: Stack(
+                  children: [
+                    const CircularProgressIndicator(),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: blue,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(32),
+                          bottomLeft: Radius.circular(32),
+                        ),
+                      ),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: mediaWidth * 0.5 - 56,
+                        ),
+                        child: SizedBox(
+                          child: Image.asset(
+                            "images/sam_office.png",
+                            width: adaptiveImageWidth(mediaWidth),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ],
