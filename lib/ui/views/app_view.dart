@@ -1,20 +1,16 @@
-// Column:
-// Row: Title, logo
-// Description
-// Row: GitHub, Play Store, App Store, Web
-// Image
-// Scroll down hint?
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:samharvey/data/models/app_model.dart';
-import 'package:samharvey/logic/services/url_launcher.dart';
 
 import '../../config/constants.dart';
+import '../../data/models/app_model.dart';
+import '../../logic/services/url_launcher.dart';
 import '../../logic/services/adaptive_font.dart';
 
 class AppView extends StatelessWidget {
+  /// UI for displaying an app in the portfolio
+
+  /// The app to display
   final AppModel app;
 
   const AppView({super.key, required this.app});
@@ -26,20 +22,24 @@ class AppView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(24),
       child:
+          // Check if orientation is landscape factoring in foldables
           (mediaWidth / mediaHeight > 0.9)
               ? Padding(
                 padding: const EdgeInsets.all(80),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    // App information
                     SizedBox(
                       width: mediaWidth / 2 - 48,
                       child: Column(
                         spacing: 32,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          // App logo/ icon
                           Row(
                             children: [
+                              // Thoughts logo is black, so add a white background
                               if (app.title != "Thoughts")
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(8),
@@ -68,6 +68,7 @@ class AppView extends StatelessWidget {
                                 ),
                             ],
                           ),
+                          // App Title
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -97,7 +98,7 @@ class AppView extends StatelessWidget {
                               ),
                             ],
                           ),
-
+                          // App Description
                           Row(
                             children: [
                               ConstrainedBox(
@@ -116,6 +117,7 @@ class AppView extends StatelessWidget {
                               ),
                             ],
                           ),
+                          // App Links for GitHub, App Store, Play Store, Web
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -182,6 +184,7 @@ class AppView extends StatelessWidget {
                         ],
                       ),
                     ),
+                    // App Screenshot
                     ConstrainedBox(
                       constraints: BoxConstraints(
                         maxWidth: mediaWidth / 2 - 160,
@@ -190,19 +193,21 @@ class AppView extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 32),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(32),
-                          child: Image.asset(app.image),
+                          child: Image.asset(app.screenshot),
                         ),
                       ),
                     ),
                   ],
                 ),
               )
+              // Portrait orientation
               : Column(
                 spacing: 24,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // App Title
                       ConstrainedBox(
                         constraints: BoxConstraints(maxWidth: mediaWidth - 48),
                         child: Text(
@@ -225,6 +230,7 @@ class AppView extends StatelessWidget {
                           ),
                         ),
                       ),
+                      // App logo/ icon
                       if (app.title != "Thoughts")
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
@@ -244,6 +250,7 @@ class AppView extends StatelessWidget {
                         ),
                     ],
                   ),
+                  // App Description
                   Row(
                     children: [
                       ConstrainedBox(
@@ -261,83 +268,77 @@ class AppView extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // App Screenshot
                         ClipRRect(
                           borderRadius: BorderRadius.circular(32),
-                          child: Image.asset(app.image),
+                          child: Image.asset(app.screenshot),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        // App Links for GitHub, App Store, Play Store, Web
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  tooltip: "GitHub",
+                            IconButton(
+                              tooltip: "GitHub",
+                              hoverColor: blue,
+                              splashColor: white,
+                              icon: const FaIcon(
+                                FontAwesomeIcons.github,
+                                color: white,
+                                size: 40,
+                              ),
+                              onPressed:
+                                  () => UrlLauncher.launch(app.githubUrl),
+                            ),
+                            app.appStoreUrl == null
+                                ? const SizedBox()
+                                : IconButton(
+                                  tooltip: "Apple App Store",
                                   hoverColor: blue,
                                   splashColor: white,
                                   icon: const FaIcon(
-                                    FontAwesomeIcons.github,
+                                    FontAwesomeIcons.appStore,
                                     color: white,
                                     size: 40,
                                   ),
                                   onPressed:
-                                      () => UrlLauncher.launch(app.githubUrl),
+                                      () =>
+                                          UrlLauncher.launch(app.appStoreUrl!),
                                 ),
-                                app.appStoreUrl == null
-                                    ? const SizedBox()
-                                    : IconButton(
-                                      tooltip: "Apple App Store",
-                                      hoverColor: blue,
-                                      splashColor: white,
-                                      icon: const FaIcon(
-                                        FontAwesomeIcons.appStore,
-                                        color: white,
-                                        size: 40,
-                                      ),
-                                      onPressed:
-                                          () => UrlLauncher.launch(
-                                            app.appStoreUrl!,
-                                          ),
-                                    ),
-                                app.playStoreUrl == null
-                                    ? const SizedBox()
-                                    : IconButton(
-                                      tooltip: "Google Play Store",
-                                      hoverColor: blue,
-                                      splashColor: white,
-                                      icon: const FaIcon(
-                                        FontAwesomeIcons.googlePlay,
-                                        color: white,
-                                        size: 40,
-                                      ),
-                                      onPressed:
-                                          () => UrlLauncher.launch(
-                                            app.playStoreUrl!,
-                                          ),
-                                    ),
-                                app.webUrl == null
-                                    ? const SizedBox()
-                                    : IconButton(
-                                      tooltip: "Web Version",
-                                      hoverColor: blue,
-                                      splashColor: white,
-                                      icon: const Icon(
-                                        Icons.language,
-                                        color: white,
-                                        size: 40,
-                                      ),
-                                      onPressed:
-                                          () => UrlLauncher.launch(app.webUrl!),
-                                    ),
-                              ],
-                            ),
+                            app.playStoreUrl == null
+                                ? const SizedBox()
+                                : IconButton(
+                                  tooltip: "Google Play Store",
+                                  hoverColor: blue,
+                                  splashColor: white,
+                                  icon: const FaIcon(
+                                    FontAwesomeIcons.googlePlay,
+                                    color: white,
+                                    size: 40,
+                                  ),
+                                  onPressed:
+                                      () =>
+                                          UrlLauncher.launch(app.playStoreUrl!),
+                                ),
+                            app.webUrl == null
+                                ? const SizedBox()
+                                : IconButton(
+                                  tooltip: "Web Version",
+                                  hoverColor: blue,
+                                  splashColor: white,
+                                  icon: const Icon(
+                                    Icons.language,
+                                    color: white,
+                                    size: 40,
+                                  ),
+                                  onPressed:
+                                      () => UrlLauncher.launch(app.webUrl!),
+                                ),
                           ],
                         ),
                       ],
                     ),
                   ),
-                  // Text("Scroll down"),
                 ],
               ),
     );

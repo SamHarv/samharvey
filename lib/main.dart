@@ -2,12 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:samharvey/config/constants.dart';
-import 'package:samharvey/firebase_options.dart';
+import 'firebase_options.dart';
 
+import 'config/constants.dart';
 import 'ui/views/portfolio_view.dart';
 
-void main() async {
+Future<void> main() async {
+  // Set the status bar colour to black
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(statusBarColor: black),
   );
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Sam Harvey Portfolio',
+      title: 'Sam Harvey',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         colorScheme: ColorScheme.dark(primary: black, secondary: blue),

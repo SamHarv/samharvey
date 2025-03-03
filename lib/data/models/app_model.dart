@@ -1,7 +1,9 @@
 class AppModel {
+  /// Model for apps to be displayed in the portfolio.
+
   final String title;
   final String description;
-  final String image;
+  final String screenshot;
   final String logo;
   final String githubUrl;
   final String? playStoreUrl;
@@ -11,7 +13,7 @@ class AppModel {
   const AppModel({
     required this.title,
     required this.description,
-    required this.image,
+    required this.screenshot,
     required this.logo,
     required this.githubUrl,
     this.playStoreUrl,

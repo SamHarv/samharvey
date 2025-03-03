@@ -7,6 +7,8 @@ import '../../logic/services/adaptive_font.dart';
 import '../../logic/services/url_launcher.dart';
 
 class DigbyView extends StatefulWidget {
+  /// UI to display the Digby project
+
   const DigbyView({super.key});
 
   @override
@@ -14,7 +16,7 @@ class DigbyView extends StatefulWidget {
 }
 
 class _DigbyViewState extends State<DigbyView> {
-  bool hovering = false;
+  bool hovering = false; // for animating logo
   @override
   Widget build(BuildContext context) {
     final mediaWidth = MediaQuery.sizeOf(context).width;
@@ -24,6 +26,7 @@ class _DigbyViewState extends State<DigbyView> {
         spacing: 48,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // Title
           ConstrainedBox(
             constraints: BoxConstraints(maxWidth: mediaWidth * 0.5),
             child: Row(
@@ -48,9 +51,8 @@ class _DigbyViewState extends State<DigbyView> {
               ],
             ),
           ),
+          // Digby logo which animates on hover
           AnimatedContainer(
-            // scale in size in all directions
-            // transform: Matrix4.identity()..scale(hovering ? 1.2 : 1.0),
             duration: Duration(seconds: 1),
             curve: Curves.easeInOut,
             child: InkWell(
@@ -74,6 +76,7 @@ class _DigbyViewState extends State<DigbyView> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                // App Store
                 IconButton(
                   tooltip: "Apple App Store",
                   hoverColor: blue,
@@ -88,6 +91,7 @@ class _DigbyViewState extends State<DigbyView> {
                         "https://apps.apple.com/us/app/digby/id6480343595",
                       ),
                 ),
+                // Google Play Store
                 IconButton(
                   tooltip: "Google Play Store",
                   hoverColor: blue,
@@ -102,6 +106,7 @@ class _DigbyViewState extends State<DigbyView> {
                         "https://play.google.com/store/apps/details?id=com.samharvey.digby&pcampaignid=web_share",
                       ),
                 ),
+                // Web Version
                 IconButton(
                   tooltip: "Web Version",
                   hoverColor: blue,

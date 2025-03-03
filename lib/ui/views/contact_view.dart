@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:samharvey/logic/services/url_launcher.dart';
 
-import '../../config/constants.dart';
-import '../../logic/services/adaptive_font.dart';
+import '/config/constants.dart';
+import '/logic/services/adaptive_font.dart';
+import '/logic/services/url_launcher.dart';
 
 class ContactView extends StatelessWidget {
+  /// UI to display contact information
   const ContactView({super.key});
 
   @override
@@ -37,7 +38,7 @@ class ContactView extends StatelessWidget {
               ),
             ),
           ),
-
+          // Email & social icons
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -47,6 +48,7 @@ class ContactView extends StatelessWidget {
                 onPressed:
                     () => UrlLauncher.launch("mailto:srharvey93@gmail.com"),
               ),
+              // Github
               IconButton(
                 icon: FaIcon(FontAwesomeIcons.github),
                 onPressed:

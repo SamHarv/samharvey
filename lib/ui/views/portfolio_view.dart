@@ -1,15 +1,17 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:samharvey/ui/views/contact_view.dart';
-import 'package:samharvey/ui/views/digby_view.dart';
-import 'package:samharvey/ui/views/home_view.dart';
+import 'package:samharvey/config/constants.dart';
 
-import '../../data/repository/app_data.dart';
+import 'contact_view.dart';
+import 'digby_view.dart';
+import 'home_view.dart';
 import 'app_view.dart';
+import '/data/repository/app_data.dart';
 
 class PortfolioView extends StatefulWidget {
+  /// UI to display the portfolio in a PageView widget
+
   const PortfolioView({super.key});
 
   @override
@@ -18,53 +20,15 @@ class PortfolioView extends StatefulWidget {
 
 class _PortfolioViewState extends State<PortfolioView> {
   final pageController = PageController();
-  int _index = 0;
+  int _index = 0; // Current page index
+  // Animation properties for page transitions
   final _animationDuration = Duration(milliseconds: 500);
   final _curve = Curves.easeIn;
+  // Detect whether mouse wheel is scrolling to prevent jank
   bool isMouse = false;
 
   @override
   Widget build(BuildContext context) {
-    // pageController.addListener(() {
-    //   // Only if using mouse wheel
-    //   (pointerSignal) {
-    //     if (pointerSignal is PointerScrollEvent) {
-    //       // Do not scroll
-
-    //       if (pointerSignal.scrollDelta.dy > 0) {
-    //         pageController.animateToPage(
-    //           pageController.page!.toInt() + 1,
-    //           duration: const Duration(milliseconds: 60),
-    //           curve: Curves.easeIn,
-    //         );
-    //       } else {
-    //         pageController.animateToPage(
-    //           pageController.page!.toInt() - 1,
-    //           duration: const Duration(milliseconds: 60),
-    //           curve: Curves.easeIn,
-    //         );
-    //       }
-    //     }
-    //   };
-    //   if (pageController.position.userScrollDirection ==
-    //       ScrollDirection.reverse) {
-    //     pageController.animateToPage(
-    //       pageController.page!.toInt() + 1,
-    //       duration: const Duration(milliseconds: 60),
-    //       curve: Curves.easeIn,
-    //     );
-    //   } else if (pageController.position.userScrollDirection ==
-    //       ScrollDirection.forward) {
-    //     if (pageController.page!.toInt() == 0) {
-    //       return;
-    //     }
-    //     pageController.animateToPage(
-    //       pageController.page!.toInt() - 1,
-    //       duration: const Duration(milliseconds: 60),
-    //       curve: Curves.easeIn,
-    //     );
-    //   }
-    // });
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -79,10 +43,11 @@ class _PortfolioViewState extends State<PortfolioView> {
                 curve: Curves.easeInOut,
               );
             },
-            child: SizedBox(height: 60, child: Image.asset("images/logo.png")),
+            child: SizedBox(height: 60, child: Image.asset(logo)),
           ),
         ),
         actions: [
+          // Navigate to contact page
           IconButton(
             icon: FaIcon(
               FontAwesomeIcons.envelope,
@@ -104,11 +69,13 @@ class _PortfolioViewState extends State<PortfolioView> {
         ],
       ),
       body: ScrollConfiguration(
+        // Enable drag scrolling with mouse
         behavior: ScrollConfiguration.of(context).copyWith(
           dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse},
         ),
         child: GestureDetector(
           onTap: () {
+            // Reset mouse state on tap
             setState(() {
               isMouse = false;
             });
@@ -116,6 +83,7 @@ class _PortfolioViewState extends State<PortfolioView> {
           child: Listener(
             onPointerSignal: (pointerSignal) {
               if (pointerSignal is PointerScrollEvent) {
+                // Determine whether the user is scrolling with a mouse
                 if (pointerSignal.kind == PointerDeviceKind.mouse) {
                   setState(() {
                     isMouse = true;
@@ -125,6 +93,7 @@ class _PortfolioViewState extends State<PortfolioView> {
                     isMouse = false;
                   });
                 }
+                // Custom scroll logic
                 if (pointerSignal.scrollDelta.dy > 0) {
                   if (_index == 10) {
                     return;
@@ -145,6 +114,9 @@ class _PortfolioViewState extends State<PortfolioView> {
               }
             },
             child: PageView(
+              // NeverScrollableScrollPhysics prevents the PageView from
+              // scrolling with the mouse wheel as it causes jank, custom
+              // scroll logic is implemented instead
               physics:
                   isMouse
                       ? const NeverScrollableScrollPhysics()
@@ -152,9 +124,11 @@ class _PortfolioViewState extends State<PortfolioView> {
               scrollDirection: Axis.vertical,
               controller: pageController,
               pageSnapping: true,
+              // Handle page change
               onPageChanged: (index) {
                 setState(() => _index = index);
               },
+              // Pages to display
               children: [
                 HomeView(),
                 AppView(app: apps[0]),

@@ -1,10 +1,11 @@
 import '../models/app_model.dart';
 
+/// Data for the apps I have developed
 const apps = [
   AppModel(
     title: "O2Tech Blood Pressure",
     description: "Track your blood pressure in a dynamic app.",
-    image: "images/o2tech_bp.png",
+    screenshot: "images/o2tech_bp.png",
     logo: "images/o2tech_bp_logo.png",
     githubUrl: "https://github.com/SamHarv/O2Tech_Blood_Pressure/tree/main",
     playStoreUrl:
@@ -16,7 +17,7 @@ const apps = [
   AppModel(
     title: "Plans",
     description: "Simple note-taking app.",
-    image: "images/plans.png",
+    screenshot: "images/plans.png",
     logo: "images/plans_logo.png",
     githubUrl: "https://github.com/SamHarv/plans",
     playStoreUrl:
@@ -28,7 +29,7 @@ const apps = [
     title: "O2Tech Calculators",
     description:
         "Mortgage Repayment Calculator and Compound Interest Calculator.",
-    image: "images/o2tech_calculators.png",
+    screenshot: "images/o2tech_calculators.png",
     logo: "images/o2tech_calculators_logo.png",
     githubUrl: "https://github.com/SamHarv/o2_calculators",
     playStoreUrl:
@@ -40,7 +41,7 @@ const apps = [
   AppModel(
     title: "grids.",
     description: "Flexible coloured grid app - track habits, create art.",
-    image: "images/grids.png",
+    screenshot: "images/grids.png",
     logo: "images/grids_logo.png",
     githubUrl: "https://github.com/SamHarv/grids",
     playStoreUrl:
@@ -51,7 +52,7 @@ const apps = [
   AppModel(
     title: "Thoughts",
     description: "An app to share my philosophical musings.",
-    image: "images/thoughts.png",
+    screenshot: "images/thoughts.png",
     logo: "images/thoughts_logo.png",
     githubUrl: "https://github.com/SamHarv/thoughts",
     webUrl: "https://thoughtsapp.com.au/",
@@ -61,15 +62,17 @@ const apps = [
     description:
         "A dynamic web app which lets you play with values for red, green, and "
         "blue to generate a colour for your reference.",
-    image: "images/rgb_tool.png",
+    screenshot: "images/rgb_tool.png",
     logo: "images/rgb_tool_logo.png",
     githubUrl: "https://github.com/SamHarv/rgb_tool",
+    playStoreUrl:
+        "https://play.google.com/store/apps/details?id=com.o2tech.colours",
     webUrl: "https://rgb-tool.web.app/",
   ),
   AppModel(
     title: "Sam's Booklist",
     description: "A compilation of my 100 favourite books.",
-    image: "images/sams_booklist.png",
+    screenshot: "images/sams_booklist.png",
     logo: "images/sams_booklist_logo.png",
     githubUrl: "https://github.com/SamHarv/sams_book_list",
     webUrl: "https://sam-s-book-list.web.app/",
@@ -78,7 +81,7 @@ const apps = [
     title: "Brighter Tomorrow",
     description:
         "Informational web app for Brighter Tomorrow Exercise Physiology.",
-    image: "images/brighter_tomorrow.png",
+    screenshot: "images/brighter_tomorrow.png",
     logo: "images/brighter_tomorrow_logo.png",
     githubUrl: "https://github.com/SamHarv/brighter_tomorrow",
     webUrl: "https://brightertomorrow.com.au/",

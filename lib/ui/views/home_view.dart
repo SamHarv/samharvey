@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:samharvey/config/constants.dart';
-import 'package:samharvey/logic/services/adaptive_font.dart';
 
+import '/config/constants.dart';
+import '/logic/services/adaptive_font.dart';
 import '../widgets/text_heading_widget.dart';
 
 class HomeView extends StatefulWidget {
+  /// UI to display home page
+
   const HomeView({super.key});
 
   @override
@@ -16,6 +18,7 @@ class _HomeViewState extends State<HomeView> {
   double get mediaWidth => MediaQuery.sizeOf(context).width;
   double get mediaHeight => MediaQuery.sizeOf(context).height;
 
+  // Adaptive width for image of Sam
   double adaptiveImageWidth(double width) {
     if (mediaWidth / mediaHeight > 0.9) {
       return width * 0.4;
@@ -26,6 +29,7 @@ class _HomeViewState extends State<HomeView> {
     }
   }
 
+  // Adaptive width for text
   double adaptiveTextWidth(double width) {
     if (mediaWidth / mediaHeight > 0.9) {
       return width * 0.5;
@@ -39,6 +43,7 @@ class _HomeViewState extends State<HomeView> {
     return Stack(
       alignment: Alignment.bottomRight,
       children: [
+        // If landscape orientation (factoring in foldables)
         if (mediaWidth / mediaHeight > 0.9)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,6 +62,7 @@ class _HomeViewState extends State<HomeView> {
                       child: TextHeadingWidget(text: "Sam Harvey"),
                     ),
                   ),
+                  // Subheading
                   Padding(
                     padding: const EdgeInsets.fromLTRB(80, 0, 24, 24),
                     child: ConstrainedBox(
@@ -79,6 +85,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ],
               ),
+              // Image of Sam
               Align(
                 alignment: Alignment.centerRight,
                 child: Stack(
@@ -110,6 +117,7 @@ class _HomeViewState extends State<HomeView> {
             ],
           )
         else
+          // Portrait orientation
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -128,6 +136,7 @@ class _HomeViewState extends State<HomeView> {
                           child: TextHeadingWidget(text: "Sam Harvey"),
                         ),
                       ),
+                      // Subheading
                       Padding(
                         padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
                         child: ConstrainedBox(
@@ -155,6 +164,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ],
               ),
+              // Image of Sam
               Padding(
                 padding: const EdgeInsets.only(left: 24, top: 24),
                 child: Align(
@@ -176,7 +186,7 @@ class _HomeViewState extends State<HomeView> {
               ),
             ],
           ),
-
+        // Animation to prompt scrolling
         Align(
           alignment: Alignment(0, 1),
           child: Image.asset("images/scroll.gif", width: 40),
