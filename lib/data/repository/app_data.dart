@@ -57,6 +57,16 @@ const apps = [
     webUrl: "https://thoughtsapp.com.au/",
   ),
   AppModel(
+    title: "RGB Colour Tool",
+    description:
+        "A dynamic web app which lets you play with values for red, green, and "
+        "blue to generate a colour for your reference.",
+    image: "images/rgb_tool.png",
+    logo: "images/rgb_tool_logo.png",
+    githubUrl: "https://github.com/SamHarv/rgb_tool",
+    webUrl: "https://rgb-tool.web.app/",
+  ),
+  AppModel(
     title: "Sam's Booklist",
     description: "A compilation of my 100 favourite books.",
     image: "images/sams_booklist.png",
@@ -72,15 +82,5 @@ const apps = [
     logo: "images/brighter_tomorrow_logo.png",
     githubUrl: "https://github.com/SamHarv/brighter_tomorrow",
     webUrl: "https://brightertomorrow.com.au/",
-  ),
-  AppModel(
-    title: "RGB Colour Tool",
-    description:
-        "A dynamic web app which lets you play with values for red, green, and "
-        "blue to generate a colour for your reference.",
-    image: "images/rgb_tool.png",
-    logo: "images/rgb_tool_logo.png",
-    githubUrl: "https://github.com/SamHarv/rgb_tool",
-    webUrl: "https://rgb-tool.web.app/",
   ),
 ];
