@@ -34,21 +34,25 @@ class _PortfolioViewState extends State<PortfolioView> {
         centerTitle: false,
         title: Padding(
           padding: const EdgeInsets.all(16),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(32),
-            onTap: () {
-              pageController.animateToPage(
-                0,
-                duration: const Duration(seconds: 1),
-                curve: Curves.easeInOut,
-              );
-            },
-            child: SizedBox(height: 60, child: Image.asset(logo)),
+          child: Tooltip(
+            message: "Navigate Home",
+            child: InkWell(
+              borderRadius: BorderRadius.circular(32),
+              onTap: () {
+                pageController.animateToPage(
+                  0,
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.easeInOut,
+                );
+              },
+              child: SizedBox(height: 60, child: Image.asset(logo)),
+            ),
           ),
         ),
         actions: [
           // Navigate to contact page
           IconButton(
+            tooltip: "Navigate to Contact",
             icon: FaIcon(
               FontAwesomeIcons.envelope,
               shadows: [

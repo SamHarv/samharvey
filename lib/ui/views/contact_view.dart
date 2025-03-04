@@ -44,18 +44,21 @@ class ContactView extends StatelessWidget {
             children: [
               // Email
               IconButton(
+                tooltip: "Email Sam",
                 icon: FaIcon(FontAwesomeIcons.envelope),
                 onPressed:
                     () => UrlLauncher.launch("mailto:srharvey93@gmail.com"),
               ),
               // Github
               IconButton(
+                tooltip: "Github",
                 icon: FaIcon(FontAwesomeIcons.github),
                 onPressed:
                     () => UrlLauncher.launch("https://github.com/SamHarv"),
               ),
               // Youtube
               IconButton(
+                tooltip: "Youtube",
                 icon: FaIcon(FontAwesomeIcons.youtube),
                 onPressed:
                     () => UrlLauncher.launch(
@@ -64,6 +67,7 @@ class ContactView extends StatelessWidget {
               ),
               // LinkedIn
               IconButton(
+                tooltip: "LinkedIn",
                 icon: FaIcon(FontAwesomeIcons.linkedin),
                 onPressed:
                     () => UrlLauncher.launch(
