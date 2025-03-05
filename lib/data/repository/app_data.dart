@@ -67,6 +67,7 @@ const apps = [
     githubUrl: "https://github.com/SamHarv/rgb_tool",
     playStoreUrl:
         "https://play.google.com/store/apps/details?id=com.o2tech.colours",
+    appStoreUrl: "https://apps.apple.com/us/app/rgb-colour-tool/id6742676407",
     webUrl: "https://rgb-tool.web.app/",
   ),
   AppModel(
