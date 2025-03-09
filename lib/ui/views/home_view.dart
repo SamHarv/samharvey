@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:samharvey/ui/widgets/fade_in_image_widget.dart';
 
 import '/config/constants.dart';
 import '/logic/services/adaptive_font.dart';
@@ -59,7 +60,9 @@ class _HomeViewState extends State<HomeView> {
                       constraints: BoxConstraints(
                         maxWidth: mediaWidth * 0.5 - 48,
                       ),
-                      child: TextHeadingWidget(text: "Sam Harvey"),
+                      child: FadeInWidget(
+                        widgetToFadeIn: TextHeadingWidget(text: "Sam Harvey"),
+                      ),
                     ),
                   ),
                   // Subheading
@@ -69,15 +72,20 @@ class _HomeViewState extends State<HomeView> {
                       constraints: BoxConstraints(
                         maxWidth: mediaWidth * 0.5 - 48,
                       ),
-                      child: Text(
-                        "Flutter Engineer.\n"
-                        "Scroll down to view my apps.",
-                        style: GoogleFonts.openSans(
-                          textStyle: TextStyle(
-                            fontSize: AdaptiveFontSize.getFontSize(context, 18),
-                            fontWeight: FontWeight.bold,
-                            fontFamily: "Open Sans",
-                            color: white,
+                      child: FadeInWidget(
+                        widgetToFadeIn: Text(
+                          "Flutter Engineer.\n"
+                          "Scroll down to view my apps.",
+                          style: GoogleFonts.openSans(
+                            textStyle: TextStyle(
+                              fontSize: AdaptiveFontSize.getFontSize(
+                                context,
+                                18,
+                              ),
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Open Sans",
+                              color: white,
+                            ),
                           ),
                         ),
                       ),
@@ -86,32 +94,34 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
               // Image of Sam
-              Align(
-                alignment: Alignment.centerRight,
-                child: Stack(
-                  children: [
-                    const CircularProgressIndicator(),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: blue,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(32),
-                          bottomLeft: Radius.circular(32),
+              FadeInWidget(
+                widgetToFadeIn: Align(
+                  alignment: Alignment.centerRight,
+                  child: Stack(
+                    children: [
+                      const CircularProgressIndicator(),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: blue,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(32),
+                            bottomLeft: Radius.circular(32),
+                          ),
                         ),
-                      ),
-                      child: ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: mediaWidth * 0.5 - 56,
-                        ),
-                        child: SizedBox(
-                          child: Image.asset(
-                            "images/sam_office.png",
-                            width: adaptiveImageWidth(mediaWidth),
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: mediaWidth * 0.5 - 56,
+                          ),
+                          child: SizedBox(
+                            child: Image.asset(
+                              "images/sam_office.png",
+                              width: adaptiveImageWidth(mediaWidth),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -133,7 +143,11 @@ class _HomeViewState extends State<HomeView> {
                           constraints: BoxConstraints(
                             maxWidth: adaptiveTextWidth(mediaWidth) - 48,
                           ),
-                          child: TextHeadingWidget(text: "Sam Harvey"),
+                          child: FadeInWidget(
+                            widgetToFadeIn: TextHeadingWidget(
+                              text: "Sam Harvey",
+                            ),
+                          ),
                         ),
                       ),
                       // Subheading
@@ -143,18 +157,20 @@ class _HomeViewState extends State<HomeView> {
                           constraints: BoxConstraints(
                             maxWidth: adaptiveTextWidth(mediaWidth) - 48,
                           ),
-                          child: Text(
-                            "Flutter Engineer.\n"
-                            "Scroll down to view my apps.",
-                            style: GoogleFonts.openSans(
-                              textStyle: TextStyle(
-                                fontSize: AdaptiveFontSize.getFontSize(
-                                  context,
-                                  18,
+                          child: FadeInWidget(
+                            widgetToFadeIn: Text(
+                              "Flutter Engineer.\n"
+                              "Scroll down to view my apps.",
+                              style: GoogleFonts.openSans(
+                                textStyle: TextStyle(
+                                  fontSize: AdaptiveFontSize.getFontSize(
+                                    context,
+                                    18,
+                                  ),
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: "Open Sans",
+                                  color: white,
                                 ),
-                                fontWeight: FontWeight.bold,
-                                fontFamily: "Open Sans",
-                                color: white,
                               ),
                             ),
                           ),
@@ -165,21 +181,23 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
               // Image of Sam
-              Padding(
-                padding: const EdgeInsets.only(left: 24, top: 24),
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: blue,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(32),
-                        bottomLeft: Radius.circular(32),
+              FadeInWidget(
+                widgetToFadeIn: Padding(
+                  padding: const EdgeInsets.only(left: 24, top: 24),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: blue,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(32),
+                          bottomLeft: Radius.circular(32),
+                        ),
                       ),
-                    ),
-                    child: Image.asset(
-                      "images/sam_office.png",
-                      width: adaptiveImageWidth(mediaWidth),
+                      child: Image.asset(
+                        "images/sam_office.png",
+                        width: adaptiveImageWidth(mediaWidth),
+                      ),
                     ),
                   ),
                 ),
@@ -189,7 +207,9 @@ class _HomeViewState extends State<HomeView> {
         // Animation to prompt scrolling
         Align(
           alignment: Alignment(0, 1),
-          child: Image.asset("images/scroll.gif", width: 40),
+          child: FadeInWidget(
+            widgetToFadeIn: Image.asset("images/scroll.gif", width: 40),
+          ),
         ),
       ],
     );
