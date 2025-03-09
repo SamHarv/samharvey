@@ -55,7 +55,7 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   // Heading to break over 2 lines if needed
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(80, 24, 24, 24),
+                    padding: const EdgeInsets.fromLTRB(96, 24, 24, 24),
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
                         maxWidth: mediaWidth * 0.5 - 48,
@@ -67,7 +67,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   // Subheading
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(80, 0, 24, 24),
+                    padding: const EdgeInsets.fromLTRB(96, 0, 24, 24),
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
                         maxWidth: mediaWidth * 0.5 - 48,

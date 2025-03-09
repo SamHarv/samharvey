@@ -37,7 +37,7 @@ class _PortfolioViewState extends State<PortfolioView> {
         title: Padding(
           padding:
               (mediaWidth / mediaHeight > 0.9)
-                  ? const EdgeInsets.fromLTRB(56, 16, 16, 16)
+                  ? const EdgeInsets.fromLTRB(80, 16, 16, 16)
                   : const EdgeInsets.all(16),
           child: Tooltip(
             message: "Navigate Home",
