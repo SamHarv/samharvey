@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:samharvey/ui/widgets/fade_in_image_widget.dart';
+import 'package:samharvey/ui/widgets/fade_in_widget.dart';
 
 import '/config/constants.dart';
 import '/logic/services/adaptive_font.dart';

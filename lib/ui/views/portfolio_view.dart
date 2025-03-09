@@ -29,11 +29,16 @@ class _PortfolioViewState extends State<PortfolioView> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaWidth = MediaQuery.sizeOf(context).width;
+    final mediaHeight = MediaQuery.sizeOf(context).height;
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
         title: Padding(
-          padding: const EdgeInsets.all(16),
+          padding:
+              (mediaWidth / mediaHeight > 0.9)
+                  ? const EdgeInsets.fromLTRB(56, 16, 16, 16)
+                  : const EdgeInsets.all(16),
           child: Tooltip(
             message: "Navigate Home",
             child: InkWell(
@@ -51,23 +56,29 @@ class _PortfolioViewState extends State<PortfolioView> {
         ),
         actions: [
           // Navigate to contact page
-          IconButton(
-            tooltip: "Navigate to Contact",
-            icon: FaIcon(
-              FontAwesomeIcons.envelope,
-              shadows: [
-                Shadow(color: Colors.blue, blurRadius: 3),
-                Shadow(color: Colors.blue, blurRadius: 6),
-                Shadow(color: Colors.blue, blurRadius: 9),
-              ],
+          Padding(
+            padding:
+                (mediaWidth / mediaHeight > 0.9)
+                    ? const EdgeInsets.only(right: 80)
+                    : const EdgeInsets.all(0),
+            child: IconButton(
+              tooltip: "Navigate to Contact",
+              icon: FaIcon(
+                FontAwesomeIcons.envelope,
+                shadows: [
+                  Shadow(color: Colors.blue, blurRadius: 3),
+                  Shadow(color: Colors.blue, blurRadius: 6),
+                  Shadow(color: Colors.blue, blurRadius: 9),
+                ],
+              ),
+              onPressed: () {
+                pageController.animateToPage(
+                  10,
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.easeInOut,
+                );
+              },
             ),
-            onPressed: () {
-              pageController.animateToPage(
-                10,
-                duration: const Duration(seconds: 1),
-                curve: Curves.easeInOut,
-              );
-            },
           ),
           SizedBox(width: 16),
         ],
