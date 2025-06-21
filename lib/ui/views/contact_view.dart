@@ -49,6 +49,7 @@ class ContactView extends StatelessWidget {
                 // Email
                 IconButton(
                   tooltip: "Email Sam",
+                  hoverColor: blue,
                   icon: FaIcon(FontAwesomeIcons.envelope),
                   onPressed:
                       () => UrlLauncher.launch("mailto:srharvey93@gmail.com"),
@@ -56,6 +57,7 @@ class ContactView extends StatelessWidget {
                 // Github
                 IconButton(
                   tooltip: "Github",
+                  hoverColor: blue,
                   icon: FaIcon(FontAwesomeIcons.github),
                   onPressed:
                       () => UrlLauncher.launch("https://github.com/SamHarv"),
@@ -63,6 +65,7 @@ class ContactView extends StatelessWidget {
                 // Youtube
                 IconButton(
                   tooltip: "Youtube",
+                  hoverColor: blue,
                   icon: FaIcon(FontAwesomeIcons.youtube),
                   onPressed:
                       () => UrlLauncher.launch(
@@ -72,6 +75,7 @@ class ContactView extends StatelessWidget {
                 // LinkedIn
                 IconButton(
                   tooltip: "LinkedIn",
+                  hoverColor: blue,
                   icon: FaIcon(FontAwesomeIcons.linkedin),
                   onPressed:
                       () => UrlLauncher.launch(

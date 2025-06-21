@@ -1,5 +1,5 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:samharvey/config/constants.dart';
 
@@ -18,14 +18,34 @@ class PortfolioView extends StatefulWidget {
   State<PortfolioView> createState() => _PortfolioViewState();
 }
 
-class _PortfolioViewState extends State<PortfolioView> {
+class _PortfolioViewState extends State<PortfolioView>
+    with TickerProviderStateMixin {
   final pageController = PageController();
-  int _index = 0; // Current page index
   // Animation properties for page transitions
   final _animationDuration = Duration(milliseconds: 500);
   final _curve = Curves.easeIn;
   // Detect whether mouse wheel is scrolling to prevent jank
   bool isMouse = false;
+
+  final homeKey = GlobalKey();
+  final contactKey = GlobalKey();
+
+  void scrollToSection(GlobalKey key) {
+    Scrollable.ensureVisible(
+      key.currentContext!,
+      duration: _animationDuration,
+      curve: _curve,
+    );
+  }
+
+  @override
+  void initState() {
+    // Delay long enough to show full splash screen animation
+    Future.delayed(
+      Duration(milliseconds: 1730),
+    ).then((_) => FlutterNativeSplash.remove());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +53,15 @@ class _PortfolioViewState extends State<PortfolioView> {
     final mediaHeight = MediaQuery.sizeOf(context).height;
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 60,
         centerTitle: false,
         title: Padding(
           padding:
               (mediaWidth / mediaHeight > 0.9)
-                  ? const EdgeInsets.fromLTRB(80, 16, 16, 16)
-                  : const EdgeInsets.all(16),
+                  ? mediaWidth > 1250
+                      ? const EdgeInsets.fromLTRB(184, 8, 8, 8)
+                      : const EdgeInsets.fromLTRB(80, 8, 8, 8)
+                  : const EdgeInsets.all(8),
           child: Tooltip(
             message: "Navigate Home",
             child: InkWell(
@@ -59,21 +82,23 @@ class _PortfolioViewState extends State<PortfolioView> {
           Padding(
             padding:
                 (mediaWidth / mediaHeight > 0.9)
-                    ? const EdgeInsets.only(right: 80)
+                    ? mediaWidth > 1250
+                        ? const EdgeInsets.only(right: 184)
+                        : const EdgeInsets.only(right: 80)
                     : const EdgeInsets.all(0),
             child: IconButton(
               tooltip: "Navigate to Contact",
               icon: FaIcon(
                 FontAwesomeIcons.envelope,
                 shadows: [
-                  Shadow(color: Colors.blue, blurRadius: 3),
-                  Shadow(color: Colors.blue, blurRadius: 6),
-                  Shadow(color: Colors.blue, blurRadius: 9),
+                  Shadow(color: blue, blurRadius: 3),
+                  Shadow(color: blue, blurRadius: 6),
+                  Shadow(color: blue, blurRadius: 9),
                 ],
               ),
               onPressed: () {
                 pageController.animateToPage(
-                  10,
+                  11,
                   duration: const Duration(seconds: 1),
                   curve: Curves.easeInOut,
                 );
@@ -83,82 +108,76 @@ class _PortfolioViewState extends State<PortfolioView> {
           SizedBox(width: 16),
         ],
       ),
-      body: ScrollConfiguration(
-        // Enable drag scrolling with mouse
-        behavior: ScrollConfiguration.of(context).copyWith(
-          dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse},
-        ),
-        child: GestureDetector(
-          onTap: () {
-            // Reset mouse state on tap
-            setState(() {
-              isMouse = false;
-            });
-          },
-          child: Listener(
-            onPointerSignal: (pointerSignal) {
-              if (pointerSignal is PointerScrollEvent) {
-                // Determine whether the user is scrolling with a mouse
-                if (pointerSignal.kind == PointerDeviceKind.mouse) {
-                  setState(() {
-                    isMouse = true;
-                  });
-                } else {
-                  setState(() {
-                    isMouse = false;
-                  });
-                }
-                // Custom scroll logic
-                if (pointerSignal.scrollDelta.dy > 0) {
-                  if (_index == 10) {
-                    return;
-                  }
-                  pageController.nextPage(
-                    duration: _animationDuration,
-                    curve: _curve,
-                  );
-                } else {
-                  if (_index == 0) {
-                    return;
-                  }
-                  pageController.previousPage(
-                    duration: _animationDuration,
-                    curve: _curve,
-                  );
-                }
-              }
-            },
-            child: PageView(
-              // NeverScrollableScrollPhysics prevents the PageView from
-              // scrolling with the mouse wheel as it causes jank, custom
-              // scroll logic is implemented instead
-              physics:
-                  isMouse
-                      ? const NeverScrollableScrollPhysics()
-                      : const PageScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              controller: pageController,
-              pageSnapping: true,
-              // Handle page change
-              onPageChanged: (index) {
-                setState(() => _index = index);
-              },
-              // Pages to display
-              children: [
-                HomeView(),
-                AppView(app: apps[0]),
-                AppView(app: apps[1]),
-                AppView(app: apps[2]),
-                AppView(app: apps[3]),
-                AppView(app: apps[4]),
-                AppView(app: apps[5]),
-                AppView(app: apps[6]),
-                AppView(app: apps[7]),
-                DigbyView(),
-                ContactView(),
-              ],
+
+      body: SingleChildScrollView(
+        physics: PageScrollPhysics(),
+        controller: pageController,
+        child: Column(
+          // Pages to display
+          children: [
+            SizedBox(
+              key: homeKey,
+              width: mediaWidth,
+              height: mediaHeight - 60,
+              child: HomeView(pageController: pageController),
             ),
-          ),
+            SizedBox(
+              width: mediaWidth,
+              height: mediaHeight - 60,
+              child: AppView(app: apps[0]),
+            ),
+            SizedBox(
+              width: mediaWidth,
+              height: mediaHeight - 60,
+              child: AppView(app: apps[1]),
+            ),
+            SizedBox(
+              width: mediaWidth,
+              height: mediaHeight - 60,
+              child: AppView(app: apps[2]),
+            ),
+            SizedBox(
+              width: mediaWidth,
+              height: mediaHeight - 60,
+              child: AppView(app: apps[3]),
+            ),
+            SizedBox(
+              width: mediaWidth,
+              height: mediaHeight - 60,
+              child: AppView(app: apps[4]),
+            ),
+            SizedBox(
+              width: mediaWidth,
+              height: mediaHeight - 60,
+              child: AppView(app: apps[5]),
+            ),
+            SizedBox(
+              width: mediaWidth,
+              height: mediaHeight - 60,
+              child: AppView(app: apps[6]),
+            ),
+            SizedBox(
+              width: mediaWidth,
+              height: mediaHeight - 60,
+              child: AppView(app: apps[7]),
+            ),
+            SizedBox(
+              width: mediaWidth,
+              height: mediaHeight - 60,
+              child: AppView(app: apps[8]),
+            ),
+            SizedBox(
+              width: mediaWidth,
+              height: mediaHeight - 60,
+              child: DigbyView(),
+            ),
+            SizedBox(
+              key: contactKey,
+              width: mediaWidth,
+              height: mediaHeight - 60,
+              child: ContactView(),
+            ),
+          ],
         ),
       ),
     );

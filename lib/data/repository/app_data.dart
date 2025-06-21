@@ -3,6 +3,14 @@ import '../models/app_model.dart';
 /// Data for the apps I have developed
 const apps = [
   AppModel(
+    title: "AquaBalance",
+    description: "A tank water management tool.",
+    screenshot: "images/aquabalance.png",
+    logo: "images/aquabalance_logo.png",
+    githubUrl: "https://github.com/SamHarv/aquabalance",
+    webUrl: "https://aquabalance-tool.web.app/",
+  ),
+  AppModel(
     title: "O2Tech Blood Pressure",
     description: "Track your blood pressure in a dynamic app.",
     screenshot: "images/o2tech_bp.png",
@@ -60,8 +68,8 @@ const apps = [
   AppModel(
     title: "RGB Colour Tool",
     description:
-        "A dynamic web app which lets you play with values for red, green, and "
-        "blue to generate a colour for your reference.",
+        "Play with values for red, green, and "
+        "blue to generate a colour for reference.",
     screenshot: "images/rgb_tool.png",
     logo: "images/rgb_tool_logo.png",
     githubUrl: "https://github.com/SamHarv/rgb_tool",

@@ -9,7 +9,9 @@ import '../widgets/text_heading_widget.dart';
 class HomeView extends StatefulWidget {
   /// UI to display home page
 
-  const HomeView({super.key});
+  final PageController pageController;
+
+  const HomeView({super.key, required this.pageController});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -18,6 +20,9 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   double get mediaWidth => MediaQuery.sizeOf(context).width;
   double get mediaHeight => MediaQuery.sizeOf(context).height;
+
+  bool isPressed = false;
+  bool isHovered = false;
 
   // Adaptive width for image of Sam
   double adaptiveImageWidth(double width) {
@@ -55,10 +60,13 @@ class _HomeViewState extends State<HomeView> {
                 children: [
                   // Heading to break over 2 lines if needed
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(96, 24, 24, 24),
+                    padding:
+                        mediaWidth > 1250
+                            ? const EdgeInsets.fromLTRB(200, 24, 24, 24)
+                            : const EdgeInsets.fromLTRB(96, 24, 24, 24),
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxWidth: mediaWidth * 0.5 - 48,
+                        maxWidth: mediaWidth * 0.5 - 96, // 48
                       ),
                       child: FadeInWidget(
                         widgetToFadeIn: TextHeadingWidget(text: "Sam Harvey"),
@@ -67,7 +75,10 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   // Subheading
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(96, 0, 24, 24),
+                    padding:
+                        mediaWidth > 1250
+                            ? const EdgeInsets.fromLTRB(200, 24, 24, 24)
+                            : const EdgeInsets.fromLTRB(96, 24, 24, 24),
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
                         maxWidth: mediaWidth * 0.5 - 48,
@@ -85,6 +96,99 @@ class _HomeViewState extends State<HomeView> {
                               fontWeight: FontWeight.bold,
                               fontFamily: "Open Sans",
                               color: white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Contact Button
+                  Padding(
+                    padding:
+                        mediaWidth > 1250
+                            ? const EdgeInsets.fromLTRB(200, 24, 24, 24)
+                            : const EdgeInsets.fromLTRB(96, 24, 24, 24),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxWidth: mediaWidth * 0.5 - 48,
+                      ),
+                      child: FadeInWidget(
+                        widgetToFadeIn: Tooltip(
+                          message: "Navigate to Contact Form",
+                          child: InkWell(
+                            onHover:
+                                (value) => setState(() {
+                                  isHovered = value;
+                                }),
+                            borderRadius: BorderRadius.all(Radius.circular(32)),
+                            onTap: () {
+                              setState(() {
+                                isPressed = true;
+                              });
+                              Future.delayed(
+                                const Duration(milliseconds: 150),
+                              ).then((value) {
+                                setState(() {
+                                  isPressed = false;
+                                });
+                                // Navigate to contact page here
+                                widget.pageController.animateToPage(
+                                  11,
+                                  duration: const Duration(seconds: 1),
+                                  curve: Curves.easeInOut,
+                                );
+                              });
+                            },
+                            child: Container(
+                              width: mediaWidth > 1000 ? 400 : 300,
+                              decoration: BoxDecoration(
+                                color:
+                                    isHovered ? Colors.black87 : Colors.black,
+                                border:
+                                    isPressed
+                                        ? BoxBorder.all(color: blue, width: 1)
+                                        : BoxBorder.all(color: blue, width: 2),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(32),
+                                ),
+                                boxShadow:
+                                    isPressed
+                                        ? []
+                                        : [
+                                          BoxShadow(color: blue, blurRadius: 3),
+                                          BoxShadow(color: blue, blurRadius: 6),
+                                          BoxShadow(color: blue, blurRadius: 9),
+                                          BoxShadow(
+                                            color: blue,
+                                            blurRadius: 12,
+                                          ),
+                                        ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Center(
+                                  child: Text(
+                                    "Contact",
+                                    style: GoogleFonts.openSans(
+                                      textStyle: TextStyle(
+                                        fontSize: AdaptiveFontSize.getFontSize(
+                                          context,
+                                          18,
+                                        ),
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: "Open Sans",
+                                        color: white,
+                                        shadows: [
+                                          Shadow(color: blue, blurRadius: 3),
+                                          Shadow(color: blue, blurRadius: 6),
+                                          Shadow(color: blue, blurRadius: 9),
+                                          Shadow(color: blue, blurRadius: 12),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -159,8 +263,7 @@ class _HomeViewState extends State<HomeView> {
                           ),
                           child: FadeInWidget(
                             widgetToFadeIn: Text(
-                              "Flutter Engineer.\n"
-                              "Scroll down to view my apps.",
+                              "Flutter Engineer.",
                               style: GoogleFonts.openSans(
                                 textStyle: TextStyle(
                                   fontSize: AdaptiveFontSize.getFontSize(
@@ -170,6 +273,129 @@ class _HomeViewState extends State<HomeView> {
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "Open Sans",
                                   color: white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Contact button
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: adaptiveTextWidth(mediaWidth) - 48,
+                          ),
+                          child: FadeInWidget(
+                            widgetToFadeIn: Tooltip(
+                              message: "Navigate to Contact Form",
+                              child: InkWell(
+                                onHover:
+                                    (value) => setState(() {
+                                      isHovered = value;
+                                    }),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(32),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    isPressed = true;
+                                  });
+                                  Future.delayed(
+                                    const Duration(milliseconds: 150),
+                                  ).then((value) {
+                                    setState(() {
+                                      isPressed = false;
+                                    });
+                                    // Navigate to contact page here
+                                    // Navigate to contact page here
+                                    widget.pageController.animateToPage(
+                                      11,
+                                      duration: const Duration(seconds: 1),
+                                      curve: Curves.easeInOut,
+                                    );
+                                  });
+                                },
+                                child: Container(
+                                  width: mediaWidth > 1000 ? 400 : 300,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        isHovered
+                                            ? Colors.black87
+                                            : Colors.black,
+                                    border:
+                                        isPressed
+                                            ? BoxBorder.all(
+                                              color: blue,
+                                              width: 1,
+                                            )
+                                            : BoxBorder.all(
+                                              color: blue,
+                                              width: 2,
+                                            ),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(32),
+                                    ),
+                                    boxShadow:
+                                        isPressed
+                                            ? []
+                                            : [
+                                              BoxShadow(
+                                                color: blue,
+                                                blurRadius: 3,
+                                              ),
+                                              BoxShadow(
+                                                color: blue,
+                                                blurRadius: 6,
+                                              ),
+                                              BoxShadow(
+                                                color: blue,
+                                                blurRadius: 9,
+                                              ),
+                                              BoxShadow(
+                                                color: blue,
+                                                blurRadius: 12,
+                                              ),
+                                            ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Center(
+                                      child: Text(
+                                        "Contact",
+                                        style: GoogleFonts.openSans(
+                                          textStyle: TextStyle(
+                                            fontSize:
+                                                AdaptiveFontSize.getFontSize(
+                                                  context,
+                                                  18,
+                                                ),
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: "Open Sans",
+                                            color: white,
+                                            shadows: [
+                                              Shadow(
+                                                color: blue,
+                                                blurRadius: 3,
+                                              ),
+                                              Shadow(
+                                                color: blue,
+                                                blurRadius: 6,
+                                              ),
+                                              Shadow(
+                                                color: blue,
+                                                blurRadius: 9,
+                                              ),
+                                              Shadow(
+                                                color: blue,
+                                                blurRadius: 12,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
